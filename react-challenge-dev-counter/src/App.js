@@ -34,6 +34,7 @@ function Counter() {
           max="10"
           defaultValue={step}
           onChange={handleStep}
+          
         />
         <label>{step}</label>
       </div>

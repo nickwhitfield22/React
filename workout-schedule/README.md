@@ -1,3 +1,5 @@
+THIS WAS REPURPOSED TO BE A COURSE-ADDING APPLICATION
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

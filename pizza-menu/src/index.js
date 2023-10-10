@@ -52,6 +52,7 @@ function App() {
     <div className="container">
       <Header />
       <Menu />
+
       <Footer />
     </div>
   );

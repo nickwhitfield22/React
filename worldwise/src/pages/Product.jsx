@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import PageNav from "../components/PageNav";
+import { useAuth } from "../contexts/FakeAuthContext";
 import styles from "./Product.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Product() {
   return (

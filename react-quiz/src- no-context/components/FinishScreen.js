@@ -1,8 +1,5 @@
-import { useQuiz } from "../contexts/QuizContext";
-
-function FinishScreen() {
-  const { points, maxPoints, highscore, dispatch } = useQuiz();
-  const percentage = (points / maxPoints) * 100;
+function FinishScreen({ points, maxPossiblePoints, highscore, dispatch }) {
+  const percentage = (points / maxPossiblePoints) * 100;
 
   let emoji;
   if (percentage === 100) emoji = "🥇";
@@ -16,7 +13,7 @@ function FinishScreen() {
       <p className="result">
         <span>{emoji}</span>You scored{" "}
         <strong>
-          {points} out of {maxPoints} ({Math.ceil(percentage)}%){" "}
+          {points} out of {maxPossiblePoints} ({Math.ceil(percentage)}%){" "}
         </strong>
       </p>
       <p className="highscore">(Highscore: {highscore} points)</p>

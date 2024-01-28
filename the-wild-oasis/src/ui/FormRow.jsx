@@ -13,7 +13,7 @@ const StyledFormRow = styled.div`
   }
 
   &:last-child {
-    padding-bottom: 0;
+    padding-bottom: 2rem;
   }
 
   &:not(:last-child) {

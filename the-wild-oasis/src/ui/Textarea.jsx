@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+const width = css`
+  width: 500px;
+`;
 
 const Textarea = styled.textarea`
   padding: 0.8rem 1.2rem;

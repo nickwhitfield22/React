@@ -53,7 +53,7 @@ const Button = styled.button`
   }
 `;
 
-//We use createPortal to render the mortal completely outside the DOM to avoid it being affected by an overflow:hidden set on a parent element of another component. This createPortal makes this Modal component completely reusable.
+//We use createPortal to render the modal completely outside the DOM to avoid it being affected by an overflow:hidden set on a parent element of another component. This createPortal makes this Modal component completely reusable.
 
 const ModalContext = createContext();
 

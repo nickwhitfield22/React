@@ -9,7 +9,7 @@ Currently, two official plugins are available:
 
 # POST UDEMY COURSE CHALLENGES FROM JONAS
 
-1. Implement the functionality to add bookings.
+1. Implement the functionality to add bookings. ✅
 2. Users should be able to edit bookings.
 3. Add checkin and checkout times.
 4. Prices vary every single day in real-world hotel applications. Implement a feature to edit the price of a room from the Cabins page.

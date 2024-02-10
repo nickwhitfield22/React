@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SearchOrder() {
-  const [query, setQuery] = useState('')
-  const navigate = useNavigate()
+  const [query, setQuery] = useState('');
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
-    e.preventDefault()
-    if (!query) return
+    e.preventDefault();
+    if (!query) return;
 
-    navigate(`/order/${query}`)
-    setQuery('')
+    navigate(`/order/${query}`);
+    setQuery('');
   }
 
   return (
@@ -22,7 +22,7 @@ function SearchOrder() {
         className="focus: w-28 rounded-full bg-yellow-50 px-4 py-2 text-sm ring-offset-2 transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-yellow-400 sm:w-64 sm:focus:w-72"
       />
     </form>
-  )
+  );
 }
 
-export default SearchOrder
+export default SearchOrder;

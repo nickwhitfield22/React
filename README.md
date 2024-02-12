@@ -41,4 +41,4 @@ This is a pizza ordering application, also created on Udemy.
 - Tailwind
 - Redux Toolkit
 
-[^1.]`npm run dev` to start applications.
+[^1.]: `npm run dev` to start applications.

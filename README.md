@@ -5,7 +5,7 @@
 Building a recipe application using the spoonacular API.
 Full stack
 
-- Vite
+- Vite[^1]
 - Supabase
 - React Router
 - React Query

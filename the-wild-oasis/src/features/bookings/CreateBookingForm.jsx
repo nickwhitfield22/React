@@ -27,12 +27,15 @@ const StyledSelect = styled.select`
   box-shadow: var(--shadow-sm);
 `;
 
-function CreateBookingForm({ onCloseModal }) {
+function CreateBookingForm({ bookingToEdit = {}, onCloseModal }) {
+  const { id: editId, ...editValues } = bookingToEdit;
+  const isEditSession = Boolean(editId);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: isEditSession ? editValues : {} });
 
   const { createBooking, isCreating } = useCreateBooking();
   const { cabins, isLoading: isLoadingCabins } = useCabins();

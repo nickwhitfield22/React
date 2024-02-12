@@ -2,10 +2,10 @@
 
 ## Recipes-for-all
 
-Building a recipe application using the spoonacular API in Vite[^1]. This is an application that will feature user authentication and saving recipes in the 'Favorites' tab.
+Building a recipe application using the spoonacular API. This is an application that will feature user authentication and saving recipes in the 'Favorites' tab.
 Full stack
 
-- Vite
+- Vite [^1]
 - Supabase
 - React Router
 - React Query
@@ -41,4 +41,4 @@ This is a pizza ordering application, also created on Udemy.
 - Tailwind
 - Redux Toolkit
 
-[1^]: `npm run dev` to start applications.
+[^1]: `npm run dev` to start applications.

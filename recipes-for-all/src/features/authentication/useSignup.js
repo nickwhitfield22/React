@@ -14,6 +14,7 @@ export function useSignup() {
       toast.success('Welcome to Recipes-For-All!');
       navigate('/home', { replace: true });
     },
+    // onError: toast.error('Error signing in.'),
   });
 
   return { signUp, isLoading };

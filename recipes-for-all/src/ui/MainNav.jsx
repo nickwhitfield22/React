@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 function MainNav() {
   return (
@@ -18,6 +18,14 @@ function MainNav() {
             to="/ingredients"
           >
             Ingredients
+          </NavLink>
+        </li>
+        <li className="py-3">
+          <NavLink
+            className="rounded-lg px-28 py-4 transition-all duration-200 hover:bg-orange-200 aria-[current=page]:bg-[#ffcf96] aria-[current=page]:text-white"
+            to="/recipes"
+          >
+            Recipes
           </NavLink>
         </li>
         <li className="py-3">

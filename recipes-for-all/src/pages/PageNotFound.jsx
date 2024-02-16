@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../features/authentication/useUser';
 
 function PageNotFound() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
 
   return (
     <div className="mx-auto mt-10 flex w-1/2 flex-col items-center justify-center space-y-10 rounded-md bg-slate-200 px-20 py-16 ">
@@ -12,8 +14,8 @@ function PageNotFound() {
         </p>
       </div>
       <button
-        onClick={() => navigate('/home')}
-        className=" rounded-lg bg-[#ff8080] px-5 py-3 text-white"
+        onClick={() => navigate('/')}
+        className=" rounded-lg bg-[#ff8080] px-5 py-3 font-mono text-white"
       >
         Return to Homepage
       </button>

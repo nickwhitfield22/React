@@ -1,10 +1,48 @@
-const API_URL =
-  "https://api.spoonacular.com/food/menuItems/search?query=burger&number=20";
+const RECIPE_URL =
+  "https://api.spoonacular.com/recipes/complexSearch?query=mac";
+const INGREDIENT_URL =
+  "https://api.spoonacular.com/food/ingredients/search?query=ginger";
+const INGREDIENT_BY_ID_URL = "https://api.spoonacular.com/recipes";
+
+export async function getRecipes() {
+  try {
+    const res = await fetch(
+      RECIPE_URL + "&apiKey=41b2ca7d47d646c49fb56e1b3e7411bf"
+    );
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function getIngredients() {
   try {
     const res = await fetch(
-      API_URL + "&apiKey=41b2ca7d47d646c49fb56e1b3e7411bf"
+      INGREDIENT_URL + "&apiKey=41b2ca7d47d646c49fb56e1b3e7411bf"
+    );
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getIngredientById(id) {
+  try {
+    const res = await fetch(
+      INGREDIENT_BY_ID_URL +
+        `/${id}/ingredientWidget.json?apiKey=41b2ca7d47d646c49fb56e1b3e7411bf`
+    );
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getRecipeInstructions(id) {
+  try {
+    const res = await fetch(
+      INGREDIENT_BY_ID_URL +
+        `/${id}/analyzedInstructions?apiKey=41b2ca7d47d646c49fb56e1b3e7411bf`
     );
     return res.json();
   } catch (error) {

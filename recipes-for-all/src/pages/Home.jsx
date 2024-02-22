@@ -1,27 +1,19 @@
-import { useIngredients } from "../features/ingredients/useIngredients";
+import Card from "../ui/Card";
 
 function Home() {
-  const { data, isLoading } = useIngredients();
-
-  if (isLoading) return <p>...loading</p>;
-  console.log(data);
   return (
-    <>
-      <h2>{data?.menuItems.length} result(s) found</h2>
-      <div className="mx-auto gap-6 sm:grid sm:grid-cols-2">
-        {data?.menuItems.map((item) => (
-          <div key={item.id}>
-            <p>{item.title}</p>
-            <p>{item.restaurantChain}</p>
-            <img
-              className="cursor-pointer rounded-full shadow-lg"
-              src={item.image}
-              onClick={() => console.log(item.id)}
-            />
-          </div>
-        ))}
-      </div>
-    </>
+    <section className="my-5 md:grid md:grid-cols-2 md:gap-5">
+      <Card
+        header="cabin"
+        info="This is the cabin i stayed in a few months ago. pretty nice"
+        src="/public/Cabin.jpg"
+      />
+      <Card
+        header="cabin"
+        info="This is the cabin i stayed in a few months ago. pretty nice"
+        src="/public/Cabin.jpg"
+      />
+    </section>
   );
 }
 

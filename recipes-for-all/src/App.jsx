@@ -6,13 +6,13 @@ import Login from "./features/authentication/Login";
 import Favorites from "./pages/Favorites";
 import Profile from "./pages/Profile";
 import Ingredients from "./pages/Ingredients";
-import Ingredient from "./pages/Ingredient";
+import Ingredient from "./features/ingredients/Ingredient";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import Signup from "./features/authentication/Signup";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import Recipes from "./pages/Recipes";
-import Recipe from "./pages/Recipe";
+import Recipe from "./features/recipes/Recipe";
 
 function App() {
   const queryClient = new QueryClient({
@@ -44,9 +44,9 @@ function App() {
             <Route path="favorites" element={<Favorites />} />
             <Route path="profile" element={<Profile />} />
             <Route path="ingredients" element={<Ingredients />} />
-            <Route path="ingredients:ingredientId" element={<Ingredient />} />
+            <Route path="ingredients/:ingredientId" element={<Ingredient />} />
             <Route path="recipes" element={<Recipes />} />
-            <Route path="recipes:recipeId" element={<Recipe />} />
+            <Route path="recipes/:recipeId" element={<Recipe />} />
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />

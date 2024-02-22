@@ -1,4 +1,4 @@
-import supabase from './supabase';
+import supabase from "./supabase";
 
 export async function signUp({ email, password, fullName, phone }) {
   const { data, error } = await supabase.auth.signUp({
@@ -11,7 +11,7 @@ export async function signUp({ email, password, fullName, phone }) {
       },
     },
   });
-  if (error) throw new Error(error.messsage);
+  if (error) throw new Error("Error in creating new account");
   return data;
 }
 
@@ -21,14 +21,14 @@ export async function login({ email, password }) {
     password,
   });
 
-  if (error) throw new Error('Provided password or email was incorrect');
+  if (error) throw new Error("Provided password or email was incorrect");
   return data;
 }
 
 export async function logout() {
   const { error } = supabase.auth.signOut();
 
-  if (error) throw new Error('Provided password or email was incorrect');
+  if (error) throw new Error("Error logging out.");
 }
 
 export async function getUser() {

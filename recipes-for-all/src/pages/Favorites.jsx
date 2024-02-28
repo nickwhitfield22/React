@@ -1,5 +1,20 @@
+import { useGetFavorites } from "../features/favorites/useGetFavorites";
+import Recipe from "../features/recipes/Recipe";
+import Spinner from "../ui/Spinner";
+
 function Favorites() {
-  return <p className="text-2xl font-semibold text-yellow-400">Favorites</p>;
+  const { favorites, isLoading } = useGetFavorites();
+  console.log(favorites);
+
+  if (!favorites) return <Spinner />;
+  if (isLoading) return <Spinner />;
+  return (
+    <div className="gap-6 sm:grid sm:grid-cols-2">
+      {favorites?.map((fav) => (
+        <Recipe key={fav.id} recipe={fav} del />
+      ))}
+    </div>
+  );
 }
 
 export default Favorites;

@@ -20,7 +20,7 @@ function ProfileOperations() {
       <IconButton onClick={() => navigate("/profile")}>
         <HiUser size={28} color="#ff8080" />
       </IconButton>
-      <IconButton>
+      <IconButton onClick={() => navigate("/settings")}>
         <IoMdSettings size={28} color="#ff8080" />
       </IconButton>
       <IconButton onClick={() => navigate("/login")}>

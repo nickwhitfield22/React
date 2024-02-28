@@ -1,38 +1,48 @@
-import { useIngredientId } from "../ingredients/useIngredientId";
-import { useGetRecipeInstructions } from "../recipes/useGetRecipeInstructions";
-import Spinner from "../../ui/Spinner";
-import HR from "../../ui/HR";
-import Results from "../../ui/Results";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useAddFavorite } from "../favorites/useAddFavorite";
+import { useUser } from "../authentication/useUser";
+import { useDeleteFavorite } from "../favorites/useDeleteFavorite";
 
-function Recipe() {
-  const { ingredient, isLoading } = useIngredientId();
-  const { instructions, isLoading: isLoading2 } = useGetRecipeInstructions();
+function Recipe({ recipe, add, del }) {
+  const [searchParams] = useSearchParams();
+  const { query } = useParams();
+  const navigate = useNavigate();
+  const { addFavorite } = useAddFavorite();
+  const { deleteFavorite } = useDeleteFavorite();
+  const {
+    user: { id: userId },
+  } = useUser();
 
-  if (isLoading || isLoading2) return <Spinner />;
   return (
-    <>
-      <Results>{ingredient?.ingredients?.length} result(s) shown</Results>
-      <HR>Ingredients</HR>
-      {ingredient.ingredients
-        .filter((ing) => ing.name !== "removed")
-        .map((ing) => (
-          <div
-            className="grid grid-cols-2 items-center border-r-indigo-300"
-            key={ing.name + Math.random()}
+    <div className="mx-auto mt-10">
+      <p className="text-md mb-2 font-medium">{recipe.title}</p>
+      <img
+        className="cursor-pointer rounded-lg shadow-lg"
+        src={recipe.image}
+        onClick={() => {
+          searchParams.set("recipeId", recipe.id);
+          navigate(`/recipes/${query}/${recipe.id}`);
+        }}
+      />
+      <div className="flex flex-row justify-end">
+        {add && (
+          <button
+            onClick={() => addFavorite({ ...recipe, userId })}
+            className="mt-4 rounded-lg bg-yellow-100 px-2 py-1 text-xs text-yellow-600"
           >
-            <p>{ing.name}</p>{" "}
-            <span>{`${ing.amount.us.value} ${ing.amount.us.unit}`}</span>
-          </div>
-        ))}
-      <HR>Instructions</HR>
-      {instructions[0].steps.map((step) => (
-        <div className="flex flex-col" key={step.number}>
-          <p className="mb-2">
-            {step.number}. {step.step}
-          </p>
-        </div>
-      ))}
-    </>
+            Add Favorite
+          </button>
+        )}
+        {del && (
+          <button
+            onClick={() => deleteFavorite(recipe.id)}
+            className="mt-4 rounded-lg bg-red-100 px-2 py-1 text-xs text-red-600"
+          >
+            Delete Favorite
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 

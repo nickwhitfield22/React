@@ -1,5 +1,5 @@
-import ProfileOperations from '../features/user/ProfileOperations';
-import Search from '../features/ingredients/Search';
+import ProfileOperations from "../features/user/ProfileOperations";
+import Search from "../features/recipes/Search";
 
 function Header() {
   return (

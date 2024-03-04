@@ -2,6 +2,7 @@ import { useLogin } from "./useLogin";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Spinner from "../../ui/Spinner";
 import * as z from "zod";
 
 const schema = z.object({
@@ -24,7 +25,7 @@ function Login() {
     login(data);
   }
 
-  if (isLoading) return <p>...loading</p>;
+  if (isLoading) return <Spinner />;
   return (
     <div className="h-screen bg-slate-100">
       <div className=" mx-auto mb-6 mt-0 flex w-full max-w-md flex-col items-center justify-center py-40">

@@ -3,10 +3,12 @@ import { useGetRecipeInstructions } from "./useGetRecipeInstructions";
 import Spinner from "../../ui/Spinner";
 import HR from "../../ui/HR";
 import Results from "../../ui/Results";
+import { useNavigate } from "react-router-dom";
 
 function Recipe() {
   const { ingredient, isLoading } = useIngredientId();
   const { instructions, isLoading: isLoading2 } = useGetRecipeInstructions();
+  const navigate = useNavigate();
 
   if (isLoading || isLoading2) return <Spinner />;
   return (
@@ -32,6 +34,12 @@ function Recipe() {
           </p>
         </div>
       ))}
+      <button
+        className="mt-5 rounded-md bg-blue-500 px-10 py-4 text-white hover:bg-blue-400"
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </button>
     </>
   );
 }

@@ -49,7 +49,7 @@ function App() {
             <Route path="settings" element={<Settings />} />
             <Route path="ingredients" element={<Ingredients />} />
             <Route path="ingredients/:ingredientId" element={<Ingredient />} />
-            <Route path="recipes/" element={<Recipes />} />
+            <Route path="recipes" element={<Recipes />} />
             <Route path="recipes/:query" element={<Recipes />} />
             <Route path="recipes/:query/:recipeId" element={<Recipe />} />
             <Route path="favorites" element={<Favorites />} />

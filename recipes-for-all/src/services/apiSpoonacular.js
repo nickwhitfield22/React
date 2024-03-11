@@ -1,5 +1,3 @@
-import { useSettings } from "../features/settings/useSettings";
-
 const RECIPE_URL = "https://api.spoonacular.com/recipes/complexSearch?query=";
 const INGREDIENT_URL =
   "https://api.spoonacular.com/food/ingredients/search?query=ginger";
@@ -8,7 +6,8 @@ const INGREDIENT_BY_ID_URL = "https://api.spoonacular.com/recipes";
 export async function getRecipes(query) {
   try {
     const res = await fetch(
-      RECIPE_URL + `${query}&number=20&apiKey=41b2ca7d47d646c49fb56e1b3e7411bf`
+      RECIPE_URL +
+        `${query}&number=20&addRecipeInformation=true&apiKey=41b2ca7d47d646c49fb56e1b3e7411bf`
     );
     return res.json();
   } catch (error) {

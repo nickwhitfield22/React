@@ -11,7 +11,18 @@ const trueOrFalse = [
 ];
 
 function Settings() {
-  const { settings, isLoading } = useSettings();
+  const {
+    settings: {
+      addRecipeInformation,
+      addRecipeNutrition,
+      maxCalories,
+      maxSugar,
+      minCalories,
+      minSugar,
+      number,
+    } = {},
+    isLoading,
+  } = useSettings();
   const { update, isPending } = useUpdateSettings();
 
   const { register, handleSubmit } = useForm();
@@ -28,42 +39,42 @@ function Settings() {
       <FormRow label="Number of Results">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={settings?.number}
+          defaultValue={number}
           {...register("number")}
         />
       </FormRow>
       <FormRow label="Mininum Calories">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={settings?.minCalories}
+          defaultValue={minCalories}
           {...register("minCalories")}
         />
       </FormRow>
       <FormRow label="Maximum Calories">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={settings?.maxCalories}
+          defaultValue={maxCalories}
           {...register("maxCalories")}
         />
       </FormRow>
       <FormRow label="Minimum Sugar">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={settings?.minSugar}
+          defaultValue={minSugar}
           {...register("minSugar")}
         />
       </FormRow>
       <FormRow label="Maximum Sugar">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={settings?.maxSugar}
+          defaultValue={maxSugar}
           {...register("maxSugar")}
         />
       </FormRow>
       <FormRow label="Add Recipe Information">
         <select
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={settings?.addRecipeInformation}
+          defaultValue={addRecipeInformation}
           {...register("addRecipeInformation")}
         >
           {trueOrFalse.map((opt) => (
@@ -76,7 +87,7 @@ function Settings() {
       <FormRow label="Add Recipe Nutrition">
         <select
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={settings?.addRecipeNutrition}
+          defaultValue={addRecipeNutrition}
           {...register("addRecipeNutrition")}
         >
           {trueOrFalse.map((opt) => (

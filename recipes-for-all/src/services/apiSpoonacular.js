@@ -7,7 +7,7 @@ export async function getRecipes(query) {
   try {
     const res = await fetch(
       RECIPE_URL +
-        `${query}&number=20&addRecipeInformation=true&apiKey=41b2ca7d47d646c49fb56e1b3e7411bf`
+        `${query}&number=100&addRecipeInformation=true&apiKey=41b2ca7d47d646c49fb56e1b3e7411bf`
     );
     return res.json();
   } catch (error) {

@@ -3,13 +3,15 @@ import Spinner from "../ui/Spinner";
 import Results from "../ui/Results";
 
 import Recipe from "../features/recipes/Recipe";
+import { useSettings } from "../features/settings/useSettings";
 
 function RecipeDetails() {
   const { recipes, isLoading } = useRecipes();
-  console.log(recipes);
+  const { settings: { number } = {} } = useSettings();
+  recipes?.results.splice(number);
 
-  if (!recipes) return;
-  if (isLoading) return <Spinner />;
+  if (!recipes) return <Spinner />;
+  // if (isLoading) return <Spinner />;
   return (
     <>
       <Results>{recipes?.results?.length} result(s) found</Results>

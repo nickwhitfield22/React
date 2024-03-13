@@ -1,14 +1,11 @@
 import supabase from "./supabase";
 
 export async function getSettings() {
-  const { data: settings, error } = await supabase
-    .from("settings")
-    .select("*")
-    .single();
+  const { data, error } = await supabase.from("settings").select("*").single();
 
   if (error) throw new Error("Error retrieving settings");
 
-  return settings;
+  return data;
 }
 
 export async function updateSettings(settings) {

@@ -25,13 +25,14 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [{ isLoading, weather, location }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ isLoading, weather, location, displayLocation }, dispatch] =
+    useReducer(reducer, initialState);
 
   useEffect(() => {
     async function fetchWeather() {
+      if (location.length < 2)
+        dispatch({ type: "displayWeather", payload: {} });
+
       dispatch({ type: "loading", payload: true });
 
       try {
@@ -50,6 +51,8 @@ function App() {
           payload: `${name} ${convertToFlag(country_code)}`,
         });
 
+        console.log(displayLocation);
+
         // 2) Getting actual weather
         const weatherRes = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min`
@@ -64,7 +67,7 @@ function App() {
     }
 
     fetchWeather();
-  }, [location]);
+  }, [location, displayLocation]);
 
   return (
     <div className="app">
@@ -78,7 +81,9 @@ function App() {
         placeholder="Search from location..."
       />
       {isLoading && <p className="loader">Loading...</p>}
-      {weather.weathercode && <Weather weather={weather} location={location} />}
+      {weather.weathercode && (
+        <Weather weather={weather} location={displayLocation} />
+      )}
     </div>
   );
 }

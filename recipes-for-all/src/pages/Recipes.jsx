@@ -9,12 +9,12 @@ function RecipeDetails() {
   const { recipes, isLoading } = useRecipes();
   const { settings: { number } = {} } = useSettings();
   recipes?.results.splice(number);
+  console.log(recipes);
 
-  if (!recipes) return <Spinner />;
-  // if (isLoading) return <Spinner />;
+  if (!recipes || isLoading) return <Spinner />;
   return (
     <>
-      <Results>{recipes?.results?.length} result(s) found</Results>
+      <Results>{recipes?.results?.length} Recipes Shown</Results>
       <div className="gap-6 sm:grid sm:grid-cols-2">
         {recipes?.results.map((item) => (
           <Recipe key={item.id} recipe={item} add />

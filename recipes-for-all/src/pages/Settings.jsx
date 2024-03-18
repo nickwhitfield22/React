@@ -1,8 +1,9 @@
-import { useForm } from "react-hook-form";
-import { useSettings } from "../features/settings/useSettings";
 import Form from "../ui/Form";
 import FormRow from "../ui/FormRow";
 import Spinner from "../ui/Spinner";
+
+import { useForm } from "react-hook-form";
+import { useSettings } from "../features/settings/useSettings";
 import { useUpdateSettings } from "../features/settings/useUpdateSettings";
 
 const trueOrFalse = [

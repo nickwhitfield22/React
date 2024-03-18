@@ -13,7 +13,7 @@ function Recipe() {
   if (isLoading || isLoading2) return <Spinner />;
   return (
     <>
-      <Results>{ingredient?.ingredients?.length} result(s) shown</Results>
+      <Results>{ingredient?.ingredients?.length} Ingredients Shown</Results>
       <HR>Ingredients</HR>
       {ingredient.ingredients
         .filter((ing) => ing.name !== "removed")

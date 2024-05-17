@@ -64,14 +64,19 @@ function Login() {
             )}
             <p className="mt-6 text-right text-sm font-normal ">
               Not a member?{" "}
-              <Link to="/signup" className="text-blue-500">
+              <Link to="/signup" className="text-blue-500 hover:underline">
                 Sign up
+              </Link>
+            </p>
+            <p className="mt-2 text-right text-sm font-normal hover:underline ">
+              <Link to="/passwordrecovery" className="text-blue-500">
+                Forgot your password?
               </Link>
             </p>
           </div>
           <button
             className="w-[16rem] rounded-lg bg-[#ff8080] py-2 font-semibold text-white hover:bg-[#ff9580]"
-            onClick={handleSubmit}
+            // onClick={handleSubmit}
           >
             Log in
           </button>

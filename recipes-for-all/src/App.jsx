@@ -14,9 +14,8 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import Recipes from "./pages/Recipes";
 import Recipe from "./features/recipes/RecipeDetail";
 import Settings from "./pages/Settings";
-
-//An example of a recipe url should be:
-//localhost:5173/recipes/pasta?recipeId=283929
+import PasswordRecovery from "./features/authentication/PasswordRecovery";
+import UpdateUser from "./features/authentication/UpdateUser";
 
 function App() {
   const queryClient = new QueryClient({
@@ -56,6 +55,8 @@ function App() {
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="passwordrecovery" element={<PasswordRecovery />} />
+          <Route path="updateuser" element={<UpdateUser />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

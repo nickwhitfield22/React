@@ -9,7 +9,7 @@ export function useGetFavorites() {
 
   const { data: favorites, isLoading } = useQuery({
     queryFn: () => fetchFavorites(id),
-    queryKey: ["favorites"],
+    queryKey: ["favorites", id],
   });
   return { favorites, isLoading };
 }

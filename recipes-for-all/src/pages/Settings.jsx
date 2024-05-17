@@ -5,6 +5,7 @@ import Spinner from "../ui/Spinner";
 import { useForm } from "react-hook-form";
 import { useSettings } from "../features/settings/useSettings";
 import { useUpdateSettings } from "../features/settings/useUpdateSettings";
+import { useEffect } from "react";
 
 const trueOrFalse = [
   { id: 0, value: true, title: "TRUE" },
@@ -12,24 +13,31 @@ const trueOrFalse = [
 ];
 
 function Settings() {
-  const {
-    settings: {
-      addRecipeInformation,
-      addRecipeNutrition,
-      maxCalories,
-      maxSugar,
-      minCalories,
-      minSugar,
-      number,
-    } = {},
-    isLoading,
-  } = useSettings();
+  // const {
+  //   settings: {
+  //     addRecipeInformation,
+  //     addRecipeNutrition,
+  //     maxCalories,
+  //     maxSugar,
+  //     minCalories,
+  //     minSugar,
+  //     number,
+  //   } = {},
+  //   isLoading,
+  // } = useSettings();
+  const { settings, isLoading } = useSettings();
   const { update, isPending } = useUpdateSettings();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: settings,
+  });
   function onSubmit(data) {
     update(data);
   }
+
+  useEffect(() => {
+    reset(settings);
+  }, [reset, settings]);
 
   if (isLoading) return <Spinner />;
   return (
@@ -40,42 +48,42 @@ function Settings() {
       <FormRow label="Number of Results">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={number}
+          // defaultValue={number}
           {...register("number")}
         />
       </FormRow>
       <FormRow label="Mininum Calories">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={minCalories}
+          // defaultValue={minCalories}
           {...register("minCalories")}
         />
       </FormRow>
       <FormRow label="Maximum Calories">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={maxCalories}
+          // defaultValue={maxCalories}
           {...register("maxCalories")}
         />
       </FormRow>
       <FormRow label="Minimum Sugar">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={minSugar}
+          // defaultValue={minSugar}
           {...register("minSugar")}
         />
       </FormRow>
       <FormRow label="Maximum Sugar">
         <input
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={maxSugar}
+          // defaultValue={maxSugar}
           {...register("maxSugar")}
         />
       </FormRow>
       <FormRow label="Add Recipe Information">
         <select
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={addRecipeInformation}
+          // defaultValue={addRecipeInformation}
           {...register("addRecipeInformation")}
         >
           {trueOrFalse.map((opt) => (
@@ -88,7 +96,7 @@ function Settings() {
       <FormRow label="Add Recipe Nutrition">
         <select
           className="w-[16rem] rounded-lg px-2 py-3 ring-[#ff8080] focus:outline-none focus:ring-2"
-          defaultValue={addRecipeNutrition}
+          // defaultValue={addRecipeNutrition}
           {...register("addRecipeNutrition")}
         >
           {trueOrFalse.map((opt) => (

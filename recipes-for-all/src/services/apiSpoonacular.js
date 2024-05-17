@@ -1,13 +1,8 @@
-const RECIPE_URL = "https://api.spoonacular.com/recipes/complexSearch?query=";
-const INGREDIENT_URL =
-  "https://api.spoonacular.com/food/ingredients/search?query=ginger";
-const INGREDIENT_BY_ID_URL = "https://api.spoonacular.com/recipes";
-
 export async function getRecipes(query) {
   try {
     const res = await fetch(
-      RECIPE_URL +
-        `${query}&number=100&addRecipeInformation=true&apiKey=41b2ca7d47d646c49fb56e1b3e7411bf`
+      import.meta.env.VITE_RECIPE_URL +
+        `${query}&number=100&addRecipeInformation=true&apiKey=${import.meta.env.VITE_API_KEY}`
     );
     return res.json();
   } catch (error) {
@@ -18,8 +13,8 @@ export async function getRecipes(query) {
 export async function getIngredients() {
   try {
     const res = await fetch(
-      INGREDIENT_URL +
-        "&addRecipeInformation=true&number=15&apiKey=41b2ca7d47d646c49fb56e1b3e7411bf"
+      import.meta.env.VITE_INGREDIENT_URL +
+        `&addRecipeInformation=true&number=15&apiKey=${import.meta.env.VITE_API_KEY}`
     );
     return res.json();
   } catch (error) {
@@ -30,8 +25,8 @@ export async function getIngredients() {
 export async function getIngredientById(id) {
   try {
     const res = await fetch(
-      INGREDIENT_BY_ID_URL +
-        `/${id}/ingredientWidget.json?apiKey=41b2ca7d47d646c49fb56e1b3e7411bf`
+      import.meta.env.VITE_INGREDIENT_BY_ID_URL +
+        `/${id}/ingredientWidget.json?apiKey=${import.meta.env.VITE_API_KEY}`
     );
     return res.json();
   } catch (error) {
@@ -42,8 +37,8 @@ export async function getIngredientById(id) {
 export async function getRecipeInstructions(id) {
   try {
     const res = await fetch(
-      INGREDIENT_BY_ID_URL +
-        `/${id}/analyzedInstructions?apiKey=41b2ca7d47d646c49fb56e1b3e7411bf`
+      import.meta.env.VITE_INGREDIENT_BY_ID_URL +
+        `/${id}/analyzedInstructions?apiKey=${import.meta.env.VITE_API_KEY}`
     );
     return res.json();
   } catch (error) {

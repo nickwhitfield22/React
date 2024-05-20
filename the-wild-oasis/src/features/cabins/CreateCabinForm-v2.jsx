@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
@@ -7,20 +7,56 @@ import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useUpdateCabin";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const schema = z
+  .object({
+    name: z.string().min(1, { message: "This field is required." }),
+    maxCapacity: z.coerce
+      .number({
+        required_error: "This field is required.",
+        invalid_type_error: "This field should be an integer.",
+      })
+      .int()
+      .min(1, { message: "Capacity should be at least 1." }),
+    regularPrice: z.coerce
+      .number()
+      .int({
+        required_error: "This field is required.",
+        invalid_type_error: "This field should be an integer.",
+      })
+      .min(1, { message: "This price should be greater than 0." }),
+    discount: z.coerce.number().int({
+      required_error: "This field is required.",
+      invalid_type_error: "This field should be an integer.",
+    }),
+    description: z.string().min(1, { message: "This field is required." }),
+    image: z.any({ required_error: "This field is required." }),
+  })
+  .refine((data) => data.regularPrice > data.discount, {
+    message: "Discount should be less than the regular price.",
+  });
+
+const DEFAULT_VALUES = {
+  name: "",
+  maxCapacity: 0,
+  regularPrice: 0,
+  discount: 0,
+  description: "",
+  image: "",
+};
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isEditing, updateCabin } = useEditCabin();
   const isWorking = isCreating || isEditing;
 
-  //we are spreading the rest of the cabin object into this editValues variable
-  const { id: editId, ...editValues } = cabinToEdit;
-  //if there is an edit id, isEditSession will be true. Otherwise it will be false
-  const isEditSession = Boolean(editId);
+  const isEditSession = Boolean(cabinToEdit);
 
-  //By setting the default values to the editValues, we are ensuring that the form is automatically populated with the data in the object whenever isEditSession is set to true.
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
-    defaultValues: isEditSession ? editValues : {},
+  const { register, handleSubmit, reset, formState } = useForm({
+    defaultValues: isEditSession ? cabinToEdit : DEFAULT_VALUES,
+    resolver: zodResolver(schema),
   });
   const { errors } = formState;
 
@@ -29,7 +65,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 
     if (isEditSession)
       updateCabin(
-        { newCabinData: { ...data, image }, id: editId },
+        { newCabinData: { ...data, image }, id: cabinToEdit?.id },
         {
           onSuccess: () => {
             reset();
@@ -63,7 +99,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           type="text"
           id="name"
           disabled={isWorking}
-          {...register("name", { required: "This field is required." })}
+          {...register("name")}
         />
       </FormRow>
 
@@ -72,13 +108,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           type="number"
           id="maxCapacity"
           disabled={isWorking}
-          {...register("maxCapacity", {
-            required: "This field is required.",
-            min: {
-              value: 1,
-              message: "Capacity should be at least 1.",
-            },
-          })}
+          {...register("maxCapacity")}
         />
       </FormRow>
 
@@ -87,13 +117,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           type="number"
           id="regularPrice"
           disabled={isWorking}
-          {...register("regularPrice", {
-            required: "This field is required.",
-            min: {
-              value: 1,
-              message: "Capacity should be at least 1.",
-            },
-          })}
+          {...register("regularPrice")}
         />
       </FormRow>
 
@@ -101,14 +125,8 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         <Input
           type="number"
           id="discount"
-          defaultValue={0}
           disabled={isWorking}
-          {...register("discount", {
-            required: "This field is required.",
-            validate: (value) =>
-              value < getValues().regularPrice ||
-              "Discount should be less than regular price.",
-          })}
+          {...register("discount")}
         />
       </FormRow>
 
@@ -119,30 +137,29 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         <Textarea
           type="number"
           id="description"
-          defaultValue=""
           disabled={isWorking}
-          {...register("description", { required: "This field is required." })}
+          {...register("description")}
         />
       </FormRow>
 
       <FormRow label="Cabin Photo">
-        <FileInput
-          id="image"
-          accept="image/*"
-          {...register("image", {
-            required: isEditSession ? false : "This field is required.",
-          })}
-        />
+        <FileInput id="image" accept="image/*" {...register("image")} />
       </FormRow>
 
       <FormRow>
-        {/* type is an HTML attribute! */}
         <Button
           variation="secondary"
           type="reset"
           onClick={() => onCloseModal?.()}
         >
           Cancel
+        </Button>
+        <Button
+          variation="secondary"
+          type="button"
+          onClick={() => reset(DEFAULT_VALUES, { keepErrors: true })}
+        >
+          Reset
         </Button>
         <Button disabled={isWorking}>
           {isEditSession ? "Edit Cabin" : "Create New Cabin"}
